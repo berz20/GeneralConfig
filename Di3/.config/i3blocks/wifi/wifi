@@ -1,0 +1,56 @@
+PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:${PATH}"
+
+################################################################################
+#
+# CUSTOM PLUGIN SECTION
+#
+################################################################################
+
+############################################################
+# Variables
+############################################################
+
+###
+### Custom Defines
+###
+appname="wifi"
+
+if [ -n "${BLOCK_INSTANCE:-}" ]; then
+	iface="${BLOCK_INSTANCE}"
+else
+	iface="$( tail -1 /proc/net/wireless | awk '{print $1}' | sed 's/://g' )"
+fi
+
+format=" {status_or_ip} ({ssid} {quality}%)"
+
+
+###
+### Thresholds
+###
+
+# Enable
+has_threshold=1
+
+# Depending on the conditions in your custom_action()
+# you can force the output to be critical or warning
+# Set these vars to 1 (in custom_action)
+force_crit=0
+force_warn=0
+force_good=0
+
+
+# ###
+# ### Additional arguments
+# ###
+# arg_params=(
+# 	"-i"
+# )
+# arg_vars=(
+# 	"iface"
+# )
+# arg_desc_val=(
+# 	"<iface>"
+# )
+# arg_desc_long=(
+# 	"Specify the network interface"
+# )
