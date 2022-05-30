@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name:sudo_parser_main
+# key: parser-main
+# --
+#include </home/berz/Packages/sugoparser/sugoparser.h>
+
+int ${0:main}(const char *file)
+{
+CsvParserVector parser(',');
+parser.parseFile(file);
+std::vector<double> x, x_err, y, y_err;
+
+for(auto sp : parser){
+x.push_back(std::stod(sp.getToken(0)));
+y.push_back(std::stod(sp.getToken(1)));
+x_err.push_back(${1:0.001});
+y_err.push_back(${2:0.001});
+}

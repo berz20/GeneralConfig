@@ -1,0 +1,4 @@
+# key: cout_print
+# name: cout_print
+# --
+cout<< "${1:testo}" << ${2:eq} << endl;

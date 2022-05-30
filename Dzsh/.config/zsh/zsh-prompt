@@ -1,0 +1,120 @@
+#!/bin/sh
+# ## autoload vcs and colors
+autoload -Uz vcs_info
+autoload -U colors && colors
+
+# enable only git
+zstyle ':vcs_info:*' enable git
+
+# setup a hook that runs before every ptompt.
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+
+# # add a function to check for untracked files in the directory.
+# # from https://github.com/zsh-users/zsh/blob/master/Misc/vcs_info-examples
+# zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+# #
+# +vi-git-untracked(){
+#     if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+#         git status --porcelain | grep '??' &> /dev/null ; then
+#         # This will show the marker if there are any untracked files in repo.
+#         # If instead you want to show the marker only if there are untracked
+#         # files in $PWD, use:
+#         #[[ -n $(git ls-files --others --exclude-standard) ]] ; then
+#         hook_com[staged]+='!' # signify new files with a bang
+#     fi
+# }
+
+
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' nopatch-format ' %F{green}+'
+zstyle ':vcs_info:*' unstagedstr ' %F{red}✗'   # display this when there are unstaged changes
+zstyle ':vcs_info:*' stagedstr ' %F{yellow}+'  # display this when there are staged changes
+zstyle ':vcs_info:*' actionformats \
+    '%F{5}%F{5}[%F{2}%b%F{3}|%F{1}%a%c%u%F{5}]%f '
+zstyle ':vcs_info:*' formats       \
+    '%F{5}%F{5}[%F{2}%b%c%u%F{5}]%f '
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+zstyle ':vcs_info:*' enable git svn
+
+theme_precmd () {
+    vcs_info
+}
+zstyle ':vcs_info:*' check-for-changes true
+# zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
+zstyle ':vcs_info:git:*' formats "%{$fg[cyan]%}─[%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b %{$fg[cyan]%}]"
+
+# format our main prompt for hostname current folder, and permissions.
+# PROMPT="%B%{$fg[cyan]%}[%{$fg[magenta]%}%n%{$fg[cyan]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[blue]%}%~"
+# PROMPT="%{$fg[green]%}%n@%m %~ %{$reset_color%}%#> "
+# PROMPT+="\$vcs_info_msg_0_ %{$reset_color%}"
+# # RPROMPT="%*"
+# # RPROMPT="acpi -b | cut -d' ' -f 4,5 "
+# # TODO look into this for more colors
+# # https://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
+# # also ascii escape codes
+# copied from apple.zsh-theme
+#
+#
+
+# Interesting link
+# https://scriptingosx.com/2019/07/moving-to-zsh-06-customizing-the-zsh-prompt/
+
+# autoload -Uz vcs_info
+
+
+# zstyle ':vcs_info:*' check-for-changes true
+# zstyle ':vcs_info:*' unstagedstr '%F{red}✗'   # display this when there are unstaged changes
+# zstyle ':vcs_info:*' stagedstr '%F{yellow}+'  # display this when there are staged changes
+# zstyle ':vcs_info:*' actionformats \
+#     '%F{5}%F{5}[%F{2}%b%F{3}|%F{1}%a%c%u%F{5}]%f '
+# zstyle ':vcs_info:*' formats       \
+#     '%F{5}%F{5}[%F{2}%b%c%u%F{5}]%f '
+# zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+# zstyle ':vcs_info:*' enable git svn
+
+# theme_precmd () {
+#     vcs_info
+# }
+
+#
+# show hostinfo only if we are in an ssh session
+function battery_charge {
+  # Battery 0: Discharging, 94%, 03:46:34 remaining
+  # bat_percent=`acpi | awk -F ':' {'print $2;'} | awk -F ',' {'print $2;'} | sed -e "s/\s//" -e "s/%.*//"`
+# bat_stat="acpi -b | cut -d' ' -f 4,5"
+  # if [ $bat_percent -lt 20 ]; then cl='%F{red}'
+  # elif [ $bat_percent -lt 50 ]; then cl='%F{yellow}'
+  # else cl='%F{green}'
+  # fi
+# print $(acpi -b | cut -d' ' -f 4)%% $(acpi -b | cut -d' ' -f 5)
+  # filled=${(l:`expr $bat_percent / 10`::▸:)}
+  # empty=${(l:`expr 10 - $bat_percent / 10`::▹:)}
+  # echo $cl$filled$empty'%F{default}'
+  # echo $bat_stat
+}
+battery_stat() { acpi -b | cut -d' ' -f 4,5 }
+# RPROMPT='[%*] $(battery_charge)'
+hostinfo=''
+if [[ -n $SSH_TTY ]]; then
+  hostinfo="%B%F{red}$HOST%f%b "
+fi
+
+#
+# show user in bold red if it is root
+#
+userinfo="%F{green}${USER}%f"
+if [[ $USER == 'root' ]]; then
+  userinfo="%B%F{red}${USER}%f%b"
+fi
+
+
+PROMPT_END=▶
+
+# show returncode of last command only when <> 0
+PROMPT="%B%{$fg[cyan]%}[%{$fg[magenta]%}%n%{$fg[cyan]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}[%{$fg[blue]%}%~%{$fg[cyan]%}]\${vcs_info_msg_0_}%B%(?..%F{green}[%?]  )%b%B%{$reset_color%}%{$fg[cyan]%}%B%{$fg[cyan]%}"$'\n'"╰─>%{$reset_color%} "
+# RPROMPT='${vcs_info_msg_0_}%B%(?..%F{green}[%?]  )%b%B%{$reset_color%} '
+# ─[$(battery_stat)%{$fg[cyan]%}]
+autoload -U add-zsh-hook
+add-zsh-hook precmd theme_precmd

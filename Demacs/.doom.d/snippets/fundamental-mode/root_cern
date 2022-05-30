@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: root include & main
+# key: root-main
+# --
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <vector>
+
+#include <TStyle.h>
+#include <TH1F.h>
+#include <TF1.h>
+#include <TLine.h>
+#include <TMath.h>
+#include <TGraphErrors.h>
+#include <TCanvas.h>
+#include <TMultiGraph.h>
+#include <TPaveStats.h>
+
+#include <../../home/berz/Packages/sugoparser/sugoparser.h>
+
+#define OUTDIR "../${1:OutputDir}/"
+using namespace std;
+
+int main()
+{
+$2
+return 0;
+}

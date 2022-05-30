@@ -1,0 +1,11 @@
+# key: latex-table
+# name: Latex Table
+# --
+void printLatexTable(std::vector<double> ${1:x}, std::vector<double> ${2:x_err},std::vector<double> ${3:y},std::vector<double> ${4:y_err},std::vector<double> ${3: x}){
+    for(size_t i=0; i<$1.size(); i++){
+        std::cout
+            << $1.at(i) << "$\pm$" << $2.at(i) << " & "
+            << $3.at(i) << "$\pm$" << $4.at(i) << " & "
+            << " \\\\ \\hline " << std::endl;
+    }
+}
