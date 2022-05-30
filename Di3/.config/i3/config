@@ -1,0 +1,358 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod4
+set $agr Mod5
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:monospace 8
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+# font pango:DejaVu Sans Mono 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+    # Borders
+        # Also removes all title bars
+        for_window [class="^.*"] border pixel 3
+        default_border pixel 3
+        default_floating_border pixel 3
+
+        # Hide borders at the edge of the screen
+        # hide_edge_borders smart
+
+##☱⛃❲❳⚋♯⛃☱⚊📆▷🔊☱※☩▷⇲⁐⁝⛁ " 
+#
+set $w1 1 
+set $w2 2 
+set $w3 3 
+set $w4 4 
+set $w5 5 
+set $w6 6 ☰
+set $w7 7 ♪
+
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec alacritty
+
+# kill focused window
+bindsym $mod+q kill
+
+# Focus
+bindsym $mod+Left focus left
+bindsym $mod+h focus left
+bindsym $mod+Down focus down
+bindsym $mod+j focus down
+bindsym $mod+Up focus up
+bindsym $mod+k focus up
+bindsym $mod+Right focus right
+bindsym $mod+l focus right
+bindsym $agr+Left focus left
+bindsym $agr+Down focus down
+bindsym $agr+Up focus up
+bindsym $agr+Right focus right
+# Moving w[windo [window]w] indows
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+l move right
+bindsym $agr+Shift+Left move left
+bindsym $agr+Shift+Down move down
+bindsym $agr+Shift+Up move up
+bindsym $agr+Shift+Right move right
+#bindsym $mod+Shif+Ctrl+Right exec /home/berz/.config/i3/.i3MoveNext.sh -1
+#bindsym $mod+Shif+Ctrl+Left exec /home/berz/config/i3/.i3MoveNext.sh 1
+bindsym $mod+Ctrl+Shift+Left move container to workspace prev; workspace prev
+bindsym $mod+Ctrl+Shift+h move container to workspace prev; workspace prev
+bindsym $mod+Ctrl+Shift+Right move container to workspace next; workspace next
+bindsym $mod+Ctrl+Shift+l move container to workspace next; workspace next
+bindsym $agr+Ctrl+Shift+Left move container to workspace prev; workspace prev
+bindsym $agr+Ctrl+Shift+Right move container to workspace next; workspace next
+# Split modes
+# bindsym $mod+h split h
+bindsym $mod+v split v
+
+# Fullscreen
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+e layout toggle split
+bindsym $mod+t layout tabbed
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+b floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+bindsym $mod+b focus mode_toggle
+
+# switch to workspace
+bindsym $mod+1 workspace $w1
+bindsym $mod+2 workspace $w2
+bindsym $mod+3 workspace $w3
+bindsym $mod+4 workspace $w4
+bindsym $mod+5 workspace $w5
+bindsym $mod+6 workspace $w6
+bindsym $mod+7 workspace $w7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $w1; workspace $w1
+bindsym $mod+Shift+2 move container to workspace $w2; workspace $w2
+bindsym $mod+Shift+3 move container to workspace $w3; workspace $w3
+bindsym $mod+Shift+4 move container to workspace $w4; workspace $w4
+bindsym $mod+Shift+5 move container to workspace $w5; workspace $w5
+bindsym $mod+Shift+6 move container to workspace $w6; workspace $w6
+bindsym $mod+Shift+7 move container to workspace $w7; workspace $w7
+bindsym $mod+Shift+8 move container to workspace number 8; workspace 8
+bindsym $mod+n move container to workspace 8; workspace 8
+bindsym $mod+Shift+9 move container to workspace number 9; workspace 9
+bindsym $mod+Shift+n move container to workspace 9;
+bindsym $mod+Shift+0 move container to workspace number 10; workspace 10
+
+
+#go to last visited workspace
+bindsym $mod+a workspace back_and_forth
+# bindsym $mod+n exec --no-startup-id ~/.config/i3/next_available_ws.sh
+# bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/next_available_ws.sh -m  # move container to new window
+#media next and prev
+bindsym Shift+Control+k exec playerctl next
+bindsym Shift+Control+j exec playerctl previous
+bindsym Shift+Control+space exec playerctl play-pause
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# Logout and Shutdown
+# bindsym $mod+Shift+F12 exec "i3-nagbar -t warning -m 'Logout ?' -b 'Sure' 'i3-msg exit'"
+# bindsym $mod+Shift+h exec "i3-nagbar -t warning -m 'Shutdown ?' -b 'Yeah, sure' 'shutdown -h now'"
+
+# Resize
+mode "resize" {
+    # arrow keys
+    bindsym Left    resize shrink   width   10 px or 4 ppt
+    bindsym Down    resize grow     height  10 px or 4 ppt
+    bindsym Up      resize shrink   height  10 px or 4 ppt
+    bindsym Right   resize grow     width   10 px or 4 ppt
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    # bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+        # Quick Lauch mode
+set $mode_launch  Settings | Nautilus | Firefox | ThunderBird | Spotify | Zathura
+mode "$mode_launch" {
+    bindsym n exec --no-startup-id nautilus ; mode "default"
+    bindsym f exec --no-startup-id firefox ; mode "default"
+    bindsym t exec --no-startup-id thunderbird ; mode "default"
+    bindsym s exec --no-startup-id spotify ; mode "default"
+    bindsym i exec --no-startup-id gnome-control-center ; mode "default"
+    bindsym z exec --no-startup-id zathura ; mode "default"
+#
+# bindsym z exec --no-startup-id "/usr/bin/flatpak run --branch=stable --arch=x86_64 com.github.ahrm.sioyek &" ; mode "default"
+bindsym Escape mode "default"
+}
+bindsym $mod+Tab mode "$mode_launch"
+
+# # HiDpi Lauch mode
+# set $mode_hidpi HiDpi | LowDpi
+# mode "$mode_hidpi" {
+#     bindsym h exec --no-startup-id ~/.config/i3/dpi.sh high ; mode "default"
+#     bindsym l exec --no-startup-id ~/.config/i3/dpi.sh low ; mode "default"
+#     bindsym Escape mode "default"
+# }
+# bindsym $mod+Shift+i mode "$mode_hidpi"
+
+# Gaps size
+gaps inner 7
+gaps outer 0
+
+# Workspace names
+# terminal
+# code
+# browser
+# messaging
+
+
+# Options
+popup_during_fullscreen leave_fullscreen
+popup_during_fullscreen leave_fullscreen
+workspace_auto_back_and_forth no
+
+# Kill window on middle-button click
+bindsym --whole-window $mod+button2 kill
+
+# Move worspace on left or right screen
+# bindsym $mod+j move workspace to output left
+# bindsym $mod+k move workspace to output right
+
+# Wallpaper
+exec_always --no-startup-id "nitrogen --restore"
+        client.focused           #9aa5ce #364A82 #c0caf5 #9aa5ce   #9aa5ce
+        client.focused_inactive  #16161d #16161d #c0caf5 #16161d   #16161d
+        client.unfocused         #16161d #16161d #c0caf5 #16161d   #16161d
+
+
+# Num Lock
+exec_always --no-startup-id  bash -c "if xset q | grep -q 'Num Lock: *off'; then xdotool key Num_Lock; fi"
+
+# Notifications
+exec_always --no-startup-id "pkill dunst; dunst -config ~/.config/i3/dunstrc1"
+
+# Network & bluetooth applet
+exec_always --no-startup-id "/usr/bin/nm-applet"
+exec_always --no-startup-id "/usr/bin/blueman-applet"
+# Use rofi, not dmenu
+bindsym $mod+d exec --no-startup-id "rofi -show drun -config ~/.config/i3/rofi"
+bindsym $mod+Shift+d exec --no-startup-id "dmenu_run"
+# Lock
+bindsym $mod+F12 exec --no-startup-id "i3lock -i /home/berz/Pictures/Wallpaper/lock.png && systemctl suspend"
+
+# Search files
+#bindsym $mod+Shift+f exec --no-startup-id "rofi -show find -modi find:/usr/share/rofi/modi/finder.sh"
+bindsym $mod+z exec "emacsclient -c -a 'emacs' "
+# Compton
+exec_always --no-startup-id "killall -q compton; compton --config ~/.config/i3/compton.conf"
+
+# Screenshot
+bindsym Print exec --no-startup-id "flameshot gui -p ~/Screenshots"
+
+# Settings
+bindsym $mod+c exec "gnome-control-center --class=floating_window"
+bindsym $mod+w exec "gnome-control-center --class=floating_window wifi"
+
+# Audio output switcher
+# If that doesn't work, run this and reboot:
+# gsettings set org.gnome.settings-daemon.plugins.media-keys rotate-video-lock-static "[]"
+bindsym $mod+o exec --no-startup-id "if pactl info | grep -q $sink2; then pacmd set-default-sink $sink1; else pacmd set-default-sink $sink2; fi"
+
+# Toggle touchpad
+set $touchpad 'SynPS/2 Synaptics TouchPad'
+bindsym $mod+Shift+z exec --no-startup-id "if xinput list-props $touchpad | grep 'Device Enabled' | grep -q '1'; then xinput disable $touchpad; else xinput enable $touchpad; fi"
+#prev/next workspace. bind it to your mouse if you have a sticky keyboard
+bindsym $mod+Ctrl+Left workspace prev_on_output
+bindsym $mod+Ctrl+h workspace prev_on_output
+bindsym $mod+Ctrl+Right workspace next_on_output
+bindsym $mod+Ctrl+l workspace next_on_output
+bindsym $agr+Ctrl+Left workspace prev_on_output
+bindsym $agr+Ctrl+Right workspace next_on_output
+
+# Assign apps to workspaces
+# assign [class="Gnome-terminal"] → $w1
+assign [class="Emacs"] → $w2
+assign [class="firefox"] → $w3
+assign [class="Thunderbird"] → $w4
+assign [class="Org.gnome.Nautilus"] → $w5
+assign [class="Evince"] → $w6
+assign [class="Spotify"] → $w7
+assign [class="Zathura"] → $w6
+# for_window [class="Gnome-terminal"] move to workspace $w1
+for_window [class="Emacs"] move to workspace $w2
+for_window [class="firefox"] move to workspace $w3
+for_window [class="Thunderbird"] move to workspace $w4
+for_window [class="Org.gnome.Nautilus"] move to workspace $w5
+for_window [class="Evince"] move to workspace $w6
+for_window [class="Spotify"] move to workspace $w7
+for_window [class="Zathura"] move to workspace $w6
+
+for_window [class="Emacs"] focus
+for_window [class="Spotify"] focus
+for_window [class="firefox"] focus
+for_window [class="Zathura"] focus
+for_window [class="Thunderbird"] focus
+for_window [class="Org.gnome.Nautilus"] focus
+# Assign workspaces to output
+workspace "$w1" output eDP-1
+workspace "$w2" output eDP-1
+workspace "$w3" output eDP-1
+
+for_window [urgent="latest" class="Emacs"] focus
+for_window [urgent="latest" class="firefox"] focus
+for_window [urgent="latest" class="Zathura"] focus
+
+for_window [window_role="pop-up"] floating enable
+for_window [class="floating_window"] floating enable
+
+# Auto-rename command
+# bindsym $mod+Shift+n \
+# rename workspace 1 to $w1; \
+# rename workspace 2 to $w2; \
+# rename workspace 3 to $w3; \
+# rename workspace 4 to $w4; \
+# # Rename workspace shorcut
+# bindsym $mod+n exec "~/.config/i3/rename-workspace.sh"
+bindsym $mod+P exec /home/berz/.config/wofi/wofi-power.sh
+# bindsym XF86MonBrightnessUp exec --no-startup-id bash -c 'b=$(xrandr --verbose | grep -i brightness | head -n 1 | cut -d" " -f2) && b2=$(echo -e "import math\nf = lambda x: (1 - 1/(1+math.exp(4*x-2)))\nprint(\\\"%.2f\\\" % f(0.1+$b))" | python) && xrandr --output eDP-1 --brightness $b2'
+bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 3"
+
+bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 3"
+
+# bindsym XF86MonBrightnessDown exec --no-startup-id bash -c 'b=$(xrandr --verbose | grep -i brightness | head -n 1 | cut -d" " -f2) && b2=$(echo -e "import math\nf = lambda x: (1 - 1/(1+math.exp(4*x-2)))\nprint(\\\"%.2f\\\" % f(-0.1+$b))" | python) && xrandr --output eDP-1 --brightness $b2'
+#redshift
+
+bindsym $mod+Shift+s exec "gammastep -m randr -l 49.1:12.1 -t 5700:3500"
+bindsym $mod+Shift+Alt+s exec "gammastep -x"
+# change volume or toggle mute
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+        bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+        bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+        bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+
+set $Locker i3lock && sleep 1
+# # Bar appearance
+# bar {
+#     font pango:DejaVu Sans, Font Awesome 5 Free Solid 10
+#     # status_command /home/berz/.config/bumblebee-status/bumblebee-status -m nic mpd cpu disk battery date time \
+# 	# pasink pasource -p time.format="%H:%M" -t iceberg-rainbow
+#     status_command i3blocks -c ~/.config/i3/i3blocks/config
+#     i3bar_command i3bar
+#     position top
+#     tray_output primary
+#     mode dock
+#     hidden_state show
+#     verbose yes
+#     colors {
+#         separator #b0aefc
+#         background #1d1f21aa
+#         statusline #c5c8c6aa
+#         focused_workspace #b0aefc  #b0aefc #1d1f21
+#         active_workspace #373b41 #373b41 #b0aefc
+#         inactive_workspace #282a2eaa #282a2eaa #f0ffff
+#         urgent_workspace #d30085 #d30085 #ffffff
+#     }
+# }
+#
+
+client.focused #b0aefc #b0aefc #1d1f21 #b0aefc
+client.focused_inactive #373b41 #373b41 #969896 #282a2e
+client.unfocused #282a2e #282a2e #969896 #282a2e
+client.urgent #d30085 #d30085 #ffffff #cc6666
+
+
+exec --no-startup-id alacritty --class floating
+# exec --no-startup-id nautilus &
+exec --no-startup-id "libinput-gestures-setup autostart start"
+# exec --no-startup-id "source /home/berz/root_install/bin/thisroot.sh"
+# exec_always --no-startup-id zathura &
+# exec --no-startup-id feh --bg-scale /home/berz/Pictures/Wallpaper/purple.jpg
+
+exec_always /home/berz/.config/polybar/launch.sh --forest &

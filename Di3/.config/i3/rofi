@@ -1,0 +1,12 @@
+# rofi.location: 1
+# rofi.font: "Monospace 12"
+rofi.font: mono 12
+rofi.modi: window,run,ssh,drun
+rofi.lines: 10
+rofi.show-icons: true
+rofi.columns: 2
+rofi.color-enabled: true
+rofi.color-window: #1d1f21, #1d1f21, #1e2529
+rofi.color-normal: #1d1f21, #9aa5ce, #1d1f21, #373b41, #ffffff
+rofi.color-active: #1d1f21, #81a2be, #1d1f21, #373b41, #81a2be
+rofi.color-urgent: #1d1f21, #d30085, #1d1f21, #373b41, #d30085

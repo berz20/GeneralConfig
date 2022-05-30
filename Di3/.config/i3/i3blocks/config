@@ -1,0 +1,67 @@
+separator_block_width=25
+
+[mediaplayer]
+#instance=firefox
+command=~/.config/i3blocks/mediaplayer/mediaplayer
+interval=5
+
+[volume]
+command=/home/berz/.config/i3blocks/volume/volume
+label=
+#LABEL=VOL
+interval=1
+#signal=5
+#STEP=5%
+#MIXER=[determined automatically]
+#SCONTROL=[determined automatically]
+#NATURAL_MAPPING=0
+color=#ff88d5
+
+[cpu]
+label= ◔
+command=~/.config/i3blocks/cpu_usage/cpu_usage
+interval=5
+color=#ff5c57
+
+[memory]
+label=⛁
+command=~/.config/i3blocks/memory/memory
+interval=15
+color=#9aedfe
+
+[disk]
+label=⛃
+command=~/.config/i3blocks/disk_usage/disk_usage
+interval=30
+color=#8a94ff
+
+[battery]
+command=~/.config/i3blocks/battery2/battery2
+markup=pango
+interval=10
+
+[time]
+#label=
+command=date '+%a %d %b %R:%S %p'
+interval=1
+color=#ff00ff
+
+# [weekend]
+
+
+# label=
+# command= SECS=$(( $(date --date="Fri. 17:30" +%s) - $(date +%s) )) && printf '%dd %dh %dm\n' $(($SECS/86400)) $(($SECS%86400/3600)) $(($SECS%3600/60))
+# interval=15
+# color=#F99D9F
+
+# [velib-work]
+# label=
+# command= printf "`curl -s 'https://api.jcdecaux.com/vls/v1/stations/41?contract=toulouse&apiKey='$JCD_API | jq -r '.available_bikes'` / 21"
+# interval=60
+# color=#6EDDA4
+
+# [velib-home]
+# label=
+# command= printf "`curl -s 'https://api.jcdecaux.com/vls/v1/stations/195?contract=toulouse&apiKey='$JCD_API | jq -r '.available_bikes'` / 18"
+# interval=60
+# color=#F9E060
